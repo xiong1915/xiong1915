@@ -137,12 +137,26 @@ if (!data) {
   const t = widget.addText("数据加载失败，检查网络后点开 Scriptable 刷新");
   t.font = Font.systemFont(12);
 } else {
-  let list = data.services || [];
-  if (family === "small") list = list.filter(s => s.available !== false);
-  list.forEach((svc, i) => {
+  const all = data.services || [];
+  const avail = all.filter(s => s.available !== false && typeof s.remaining === "number");
+  const unavail = all.filter(s => !(s.available !== false && typeof s.remaining === "number"));
+  const shown = family === "small" ? avail.slice(0, 2) : avail;
+  shown.forEach((svc, i) => {
     if (i > 0) widget.addSpacer(7);
     addService(widget, svc, barWidth);
   });
+  if (family === "large") {
+    unavail.forEach(svc => {
+      widget.addSpacer(7);
+      addService(widget, svc, barWidth);
+    });
+  } else if (family !== "small" && unavail.length > 0) {
+    // 中号空间有限，无数据的服务合并成一行
+    widget.addSpacer(8);
+    const line = widget.addText(unavail.map(s => s.name).join(" · ") + "：暂无数据");
+    line.font = Font.systemFont(10);
+    line.textColor = GREY;
+  }
 }
 
 // 向系统申请 30 分钟后刷新（实际刷新时机由 iOS 决定）
