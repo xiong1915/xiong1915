@@ -1,0 +1,39 @@
+{
+  "version": 1,
+  "updatedAt": "2026-11-17T15:20:00+08:00",
+  "services": [
+    {
+      "id": "muse-weekly",
+      "name": "Muse",
+      "label": "本周免费额度",
+      "remaining": 79,
+      "resetAt": "2026-11-20T11:18:00+08:00"
+    },
+    {
+      "id": "muse-pool",
+      "name": "Muse 额度池",
+      "label": "额外 tokens",
+      "remaining": 100,
+      "resetAt": null,
+      "detail": "27B tokens · 未动用"
+    },
+    {
+      "id": "claude",
+      "name": "Claude",
+      "available": false,
+      "reason": "免费版，无可读用量接口"
+    },
+    {
+      "id": "chatgpt",
+      "name": "ChatGPT",
+      "available": false,
+      "reason": "无可读用量接口"
+    },
+    {
+      "id": "gemini",
+      "name": "Gemini",
+      "available": false,
+      "reason": "AI Pro 试用，无可读用量接口"
+    }
+  ]
+}
